@@ -524,6 +524,7 @@ def train(hyp, opt, device, callbacks):
                         batch_size=batch_size // WORLD_SIZE * 2,
                         imgsz=imgsz,
                         model=attempt_load(f, device).half(),
+                        conf_thres=0.001 if is_coco else 0.05,
                         iou_thres=0.65 if is_coco else 0.60,  # best pycocotools at iou 0.65
                         single_cls=single_cls,
                         dataloader=val_loader,
